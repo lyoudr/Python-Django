@@ -1,0 +1,17 @@
+stages:
+  ## - test
+  - deploy
+
+# test:
+#   stage: test
+
+deploy:
+  stage: deploy
+  # For running on localhost
+  # variables:
+  #   EC2_PEM: /home/ann/Code/AWS_EC2/ann-server.pem
+  script:
+    - echo "$EC2_PEM"
+    - ssh -i $EC2_PEM ubuntu@ec2-13-231-184-72.ap-northeast-1.compute.amazonaws.com "pwd && cd React/pythonserver/ && git pull origin master && cd django_react/docker/ && docker-compose up -d --build"
+  tags :
+    - ann

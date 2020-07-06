@@ -1,0 +1,48 @@
+version: '3.8'
+
+services:
+  nginx:
+    image: nginx
+    volumes:
+      - ./nginx_default.conf:/etc/nginx/conf.d/default.conf
+      - ../frontend:/frontend
+    depends_on:
+      - web
+    ports:
+      - 3000:3000 # For api request. Reverse proxy to annbackend:5000
+      - 4600:4600 # For websocket request. Reverse proxy to annbackend:5000
+    restart: always
+  db: # after building this "web" image, run as first container
+    image: mysql:8.0 # use "image" represents pulling image from remote, and run this image to container
+    # ports:
+    #   - "3306:3306" # Don't have to open toward outer side
+    command: --default-authentication-plugin=mysql_native_password --mysqlx=0 # represent use older password verify way (mysql 5.0) to enter to mysql 8.0
+    environment:
+      - MYSQL_DATABASE=testDB # create database testDB
+      - MYSQL_USER=ann # create ann user
+      - MYSQL_PASSWORD=1234 # create ann's password in mysql
+      - MYSQL_ROOT_PASSWORD=1234 # represent db default root password
+    # volumes: # a folder space (outside container) to save changed files from container file (ex: may add new data to database). it prevents data lose after deletint container
+    #   - ../mysql_volume:/var/lib/mysql # can't use /var/lib/mysql on the left side , becuase it could change mysql authority on localhost
+  web: # after building this "web" image, run as second container
+    container_name: annbackend
+    build: # use "build" represents use defined "Dockerfile" in this directory "." to build image and run this image
+      context: ../ # context represents the repository where build stage start
+      dockerfile: docker/Dockerfile # tell docker-compose where Dockerfile resides and bring Dockerfile to this repository from there
+    # environment:
+    #   - USER=shitcomposer
+    # volumes:
+    #   - "./saved_change:/python_server" # (X) this will bring let "python_server" folder in container become empty, because saved_change is empty at beginning 
+    depends_on:
+      - db
+    links: # represents this "web" service needs to link to "db" service defined above
+      - db
+      - session_caching
+    entrypoint: ["/python_server/docker/docker-entrypoint.sh"] # run this command to import "docker-entrypoint.sh" and run the code defined in it.
+    # ports:
+    #   - "5000:5000" # outer port : inside docker container port  # Don't have to open toward outer side
+    restart: always
+  session_caching:
+    container_name: session_caching
+    image: redis:latest
+    restart: always

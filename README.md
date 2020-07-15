@@ -31,3 +31,9 @@ This website contains common applications such as clothes shops, chat rooms, blo
 (2) Docker-compose to run several containers at once.
 
 (3) Used the GitLab CI/CD mechanism to auto-deploy to the cloud, such as AWS EC2, and use Docker-compose to run three containers (Backend, MySQL, Nginx) at one time.
+
+### Architechture
+
+Below is my project architechture
+
+https://user-images.githubusercontent.com/42345166/87497034-4ba1c900-c687-11ea-8c4a-b272d7f1c566.jpg

@@ -9,9 +9,11 @@ This website contains common applications such as clothes shops, chat rooms, blo
 
 (2) Used ORM syntax to communicate with DB. Besides, I use database migration to do version control of database schema.
 
-(3) Dispatch URL, process various requests in View, and do Error handling.
+(3) Dispatched URL, and processed various requests in View, 
 
-(4) Used Session to record user login status, and use the Redis cache server to optimize performance.
+(4) Did Error handling if there were exceptions.
+
+(5) Used Session to record user login status, and use the Redis cache server to optimize performance.
 
 ### MySQL
 (1) Designed table schema and define relationships between table using Foreign Key.
@@ -34,6 +36,6 @@ This website contains common applications such as clothes shops, chat rooms, blo
 
 ### Architechture
 
-Below is my project architechture
+Following is my project architechture diagram.
 
 https://user-images.githubusercontent.com/42345166/87497034-4ba1c900-c687-11ea-8c4a-b272d7f1c566.jpg

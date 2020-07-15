@@ -96,13 +96,13 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'testDB',
         # For LocalHost
-        # 'USER': 'ann', 
-        # 'PASSWORD': '123456',
-        # 'HOST': '127.0.0.1',
+        'USER': 'ann', 
+        'PASSWORD': '123456',
+        'HOST': '127.0.0.1',
         # For docker-compose
-        'USER': 'root', # when use docker container, python server can only connect to mysql docker throught root user
-        'PASSWORD': '1234',
-        'HOST': 'db',
+        # 'USER': 'root', # when use docker container, python server can only connect to mysql docker throught root user
+        # 'PASSWORD': '1234',
+        # 'HOST': 'db',
         'PORT': '3306',
         'ATOMIC_REQUESTS': True
     }

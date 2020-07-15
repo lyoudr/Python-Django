@@ -1,8 +1,8 @@
-# 1.Introduction
+# Introduction
 
 This website contains common applications such as clothes shops, chat rooms, blogs, etc.
 
-# 2. Techniques used
+# Techniques used
 
 ### Python & Django
 (1) Designed each table data Model and used Many-to-many or Foreign key fields to establish the relation between tables.
